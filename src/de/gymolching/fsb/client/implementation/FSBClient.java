@@ -1,10 +1,11 @@
 package de.gymolching.fsb.client.implementation;
 
-import java.io.*;
-import java.net.*;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
-import de.gymolching.fsb.api.FSBPosition;
-import de.gymolching.fsb.client.api.*;
+import de.gymolching.fsb.client.api.FSBClientInterface;
+import de.gymolching.fsb.client.api.FSBPosition;
 
 public class FSBClient implements FSBClientInterface
 {

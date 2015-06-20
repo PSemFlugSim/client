@@ -2,8 +2,6 @@ package de.gymolching.fsb.client.api;
 
 import java.io.IOException;
 
-import de.gymolching.fsb.api.FSBPosition;
-
 public interface FSBClientInterface
 {
 	/**
