@@ -2,8 +2,6 @@ package de.gymolching.fsb.gui;
 
 import java.io.*;
 
-import javax.swing.*;
-
 import org.eclipse.swt.*;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.layout.*;
@@ -12,12 +10,20 @@ import org.eclipse.swt.widgets.*;
 import de.gymolching.fsb.client.api.*;
 import de.gymolching.fsb.client.implementation.*;
 
-public class Controller
+public class Controller// implements Runnable
 {
 	public static void main(String[] args)
 	{
-		Controller controller = new Controller();
-		controller.startGUI();
+		Controller controller;
+		try
+		{
+			controller = new Controller();
+			controller.startGUI();
+		}
+		catch (InterruptedException | IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	private Display display;
@@ -28,44 +34,53 @@ public class Controller
 	private Button btnSendData;
 	private Scale scale;
 
-	public Controller()
+	public void run()
+	{
+		// Ask for client IP
+//		boolean connected = false;
+//		do
+//		{
+//			try
+//			{
+//				String serverIP = JOptionPane.showInputDialog("Server ip:", "127.0.0.1");
+//				if (serverIP == null)
+//				{
+//					System.err.println("Canceling connection attempt, exiting...");
+//					System.exit(1);
+//				}
+//				String serverPort = JOptionPane.showInputDialog("Server port:", "666");
+//				if (serverPort == null)
+//				{
+//					System.err.println("Canceling connection attempt, exiting...");
+//					System.exit(1);
+//				}
+//
+//				this.client.connect(serverIP, new Integer(serverPort));
+//				connected = true;
+//			}
+//			catch (Exception e)
+//			{
+//				System.err.println("Could not connect, pls retry!");
+//			}
+//		} while (!connected);
+		
+	}
+
+	public Controller() throws InterruptedException, IOException
 	{
 		this.client = new FSBClient();
+		this.client.connect("192.168.1.168", 666);
 
-		// Ask for client IP
-		boolean connected = false;
-		do
-		{
-			try
-			{
-				String serverIP = JOptionPane.showInputDialog("Server ip:", "127.0.0.1");
-				if (serverIP == null)
-				{
-					System.err.println("Canceling connection attempt, exiting...");
-					System.exit(1);
-				}
-				String serverPort = JOptionPane.showInputDialog("Server port:", "666");
-				if (serverPort == null)
-				{
-					System.err.println("Canceling connection attempt, exiting...");
-					System.exit(1);
-				}
-
-				this.client.connect(serverIP, new Integer(serverPort));
-				connected = true;
-			}
-			catch (Exception e)
-			{
-				System.err.println("Could not connect, pls retry!");
-			}
-		} while (!connected);
-
+//		Thread thread = new Thread(this);
+//		thread.start();
+//		thread.join();
+		
 		this.display = new Display();
 		this.shell = new Shell(display);
 		shell.setSize(238, 450);
 		shell.setLayout(new GridLayout(1, false));
 
-		scale = new Scale(shell, SWT.VERTICAL);
+		scale = new Scale(shell, SWT.HORIZONTAL);
 		scale.setMinimum(0);
 		scale.setMaximum(255);
 		scale.setIncrement(1);
@@ -107,9 +122,7 @@ public class Controller
 			{
 				try
 				{
-					client.sendNewPosition(new FSBPosition(text.getText() + ":" + text.getText()
-							+ ":" + text.getText() + ":" + text.getText() + ":" + text.getText()
-							+ ":" + text.getText() + ":"));
+					client.sendNewPosition(new FSBPosition(text.getText() + ":" + text.getText() + ":" + text.getText() + ":" + text.getText() + ":" + text.getText() + ":" + text.getText() + ":"));
 				}
 				catch (IOException e)
 				{
