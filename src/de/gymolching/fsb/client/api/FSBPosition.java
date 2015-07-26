@@ -22,7 +22,6 @@ public class FSBPosition
 	public FSBPosition(String inputString)
 	{
 		String[] lengths = inputString.split(":");
-		System.out.println(lengths);
 		this.length1 = new Integer(lengths[0]);
 		this.length2 = new Integer(lengths[1]);
 		this.length3 = new Integer(lengths[2]);
