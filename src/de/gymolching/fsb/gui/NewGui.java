@@ -45,6 +45,7 @@ public class NewGui {
     private final JFrame frame;
     private final LcsPanel panel;
     private final LcsFader[] faders;
+    private final LcsButton quitButton;
     private final LcsButton submitButton;
     private final SubmitButtonListener submitButtonListener;
 
@@ -80,7 +81,10 @@ public class NewGui {
             faders[i] = new LcsFader(60 * i, 0, 60, 190, "m" + i, new Color(150, 150, 255));
             panel.addLcsComponent(faders[i]);
         }
-        submitButton = new LcsButton(60 * faders.length - 80, 195, 80, 40, "submit", new Color(255, 100, 100));
+        quitButton = new LcsButton(60 * faders.length - 80 - 80 - 5, 195, 80, 40, "quit", new Color(255, 100, 100));
+        quitButton.setListener(() -> System.exit(0));
+        panel.addLcsComponent(quitButton);
+        submitButton = new LcsButton(60 * faders.length - 80, 195, 80, 40, "submit", new Color(100, 255, 100));
         submitButtonListener = new SubmitButtonListener();
         submitButton.setListener(submitButtonListener);
         panel.addLcsComponent(submitButton);
