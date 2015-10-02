@@ -30,6 +30,7 @@ public class FSBClient implements FSBClientInterface
 
 		this.clientSocket = new Socket(host, port);
 		this.connOutStream = new DataOutputStream(this.clientSocket.getOutputStream());
+		if (this.verbose) System.out.println("[Client] Connection established");
 	}
 
 	public void disconnect() throws IOException

@@ -69,7 +69,7 @@ public class Controller// implements Runnable
 	public Controller() throws InterruptedException, IOException
 	{
 		this.client = new FSBClient();
-		this.client.connect("192.168.1.168", 666);
+		this.client.connect("localhost", 1234);
 
 //		Thread thread = new Thread(this);
 //		thread.start();

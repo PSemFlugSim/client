@@ -1,4 +1,3 @@
 Manifest-Version: 1.0
-Class-Path: ../lib/swt/swt.jar
-Main-Class: de.gymolching.fsb.gui.Controller
+Main-Class: de.gymolching.fsb.gui.NewGui
 
