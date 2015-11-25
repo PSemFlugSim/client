@@ -35,7 +35,10 @@ public class PanelForPillarLength extends JPanel{
     //Event for JSlider
     private event e;
 
-    public PanelForPillarLength(int number, String text, int percent_min, int percent_max, int percent_init, int majorTickSpacing, int minorTickSpacing){
+    //Char for event
+    private char ev;
+
+    public PanelForPillarLength(int number, String text, int percent_min, int percent_max, int percent_init, int majorTickSpacing, int minorTickSpacing, char event){
         pillar = new JSlider(JSlider.HORIZONTAL, percent_min, percent_max, percent_init);
         pillar.setMinorTickSpacing(PERCENT_TIC);
         pillar.setPaintLabels(true);
@@ -45,7 +48,12 @@ public class PanelForPillarLength extends JPanel{
         pillar.createStandardLabels(1);
 
         Dimension dimension = new Dimension(60, 10);
-        label = new JLabel(percent_init +" %");
+        if(event == 'e') {
+            label = new JLabel(percent_init + " %");
+        }
+        else{
+            label = new JLabel(percent_init + " °");
+        }
         label.setFont(new Font("Arial", Font.BOLD, 20));
         label.setMaximumSize(dimension);
         label.setPreferredSize(dimension);
@@ -57,6 +65,8 @@ public class PanelForPillarLength extends JPanel{
         layout.setHgap(10);
 
         e = new event();
+        
+        ev = event;
 
         pillar.addChangeListener(e);
 
@@ -68,17 +78,17 @@ public class PanelForPillarLength extends JPanel{
         super.add(label, BorderLayout.EAST);
     }
 
-    public PanelForPillarLength(int number, String text, int percent_min, int percent_max, int percent_init){
+    public PanelForPillarLength( int number, String text, int percent_min, int percent_max, int percent_init, char event ){
 
-        super.add(new PanelForPillarLength(number, text, percent_min, percent_max, percent_init, 10, 5));
+        super.add(new PanelForPillarLength( number, text, percent_min, percent_max, percent_init, 10, 5, event));
     }
 
-    public PanelForPillarLength(int number, String text){
-        super.add(new PanelForPillarLength(number, text, PERCENT_MIN, PERCENT_MAX, PERCENT_INIT));
+    public PanelForPillarLength( int number, String text ){
+        super.add(new PanelForPillarLength( number, text, PERCENT_MIN, PERCENT_MAX, PERCENT_INIT, 'e' ));
     }
 
-    public PanelForPillarLength(int number, String text, int degree_init){
-        super.add(new PanelForPillarLength(number, text, -50, 50, degree_init));
+    public PanelForPillarLength( int number, String text, int degree_init ){
+        super.add(new PanelForPillarLength( number, text, -50, 50, degree_init, 'e' ));
     }
     public int GetValueOfSlider(){
         return pillar.getValue();
@@ -92,7 +102,12 @@ public class PanelForPillarLength extends JPanel{
         public void stateChanged(ChangeEvent e) {
             int value = pillar.getValue();
 
-            label.setText(value +" %");
-        }
+            if(ev == 'e') {
+                label.setText(value + " %");
+            }
+            else{
+                label.setText(value + " °");
+            }
     }
+}
 }
