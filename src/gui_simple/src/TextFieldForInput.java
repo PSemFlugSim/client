@@ -47,5 +47,13 @@ public class TextFieldForInput extends JPanel{
         super.add(textField, BorderLayout.CENTER);
         super.add(label, BorderLayout.EAST);
     }
-
+    
+    int getValue(){
+    	try {
+        	return Integer.valueOf(textField.getText());    		
+    	} catch (NumberFormatException e) {
+    		System.err.println("Fehler bei Eingabe");
+    		return 0;
+    	}
+    }
 }

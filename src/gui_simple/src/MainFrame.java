@@ -6,7 +6,12 @@ package gui_simple.src; /**
 
 import javax.swing.*;
 
+import gui_simple.src.ManipulateCoordinatesPanel.event;
+
 import static javax.swing.BoxLayout.PAGE_AXIS;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class MainFrame extends JFrame {
@@ -20,9 +25,12 @@ public class MainFrame extends JFrame {
     JPanel secondPanel;
 
     //Third and final panal
-    JPanel[] textFieldPanel;
-    JPanel[] sliderForFinalPanel;
+    TextFieldForInput[] textFieldPanel;
+    PanelForPillarLength[] sliderForFinalPanel;
     JPanel thirdPanel;
+    
+    //event for Button
+    event e;
     
     public MainFrame(String title) {
         super(title);
@@ -89,21 +97,35 @@ public class MainFrame extends JFrame {
         }
 
         JButton start = new JButton("Start");
+        
+        start.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int values[] = new int[6];
+				values[0] = textFieldPanel[0].getValue();
+				values[1] = textFieldPanel[1].getValue();
+				values[2] = textFieldPanel[2].getValue();
+				values[3] = sliderForFinalPanel[0].GetValueOfSlider();
+				values[4] = sliderForFinalPanel[1].GetValueOfSlider();
+				values[5] = sliderForFinalPanel[2].GetValueOfSlider();
+				
+				for (int v : values) System.out.println("v=" + v);
+			}
+		});
 
         thirdPanel.add(start);
 
         //create Tabs
-        JTabbedPane  tabbedPane = new JTabbedPane();
+        JPanel  tabbedPane = new JPanel();
 
         //add Panels as Tabs
-        tabbedPane.add("first Panel", firstPanel);
-        tabbedPane.add("second Panel",secondPanel);
-        tabbedPane.add("third Panel", thirdPanel);
+        tabbedPane.add(thirdPanel);
 
         //super.add(firstPanel);
         super.setSize(650, 800);
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         super.setVisible(true);
         super.add(tabbedPane);
-    }
+    } 
 }
