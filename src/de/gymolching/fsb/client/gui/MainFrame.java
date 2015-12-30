@@ -7,7 +7,6 @@ package de.gymolching.fsb.client.gui; /**
 import javax.swing.*;
 
 import de.gymolching.fsb.client.api.FSBClientInterface;
-import de.gymolching.fsb.client.api.FSBPosition;
 import de.gymolching.fsb.client.implementation.FSBClient;
 import de.gymolching.fsb.client.maths.Maths;
 
@@ -43,33 +42,7 @@ public class MainFrame extends JFrame {
 		super(title);
 
 		// Setup client connection TODO: replace with actual implementation
-		this.client = new FSBClientInterface() {
-
-			@Override
-			public void setVerbose(boolean verbose) {
-				// Do nothing
-			}
-
-			@Override
-			public void sendNewPosition(FSBPosition position) throws IOException {
-				System.out.println("Sending new position: " + position.toString());
-			}
-
-			@Override
-			public void disconnect() throws IOException {
-				System.out.println("Disconnected");
-			}
-
-			@Override
-			public void connect(String host, int port) throws IOException {
-				System.out.println("Connected");
-			}
-
-			@Override
-			public boolean isConnected() {
-				return true;
-			}
-		};
+		this.client = new FSBClient();
 		boolean connected = false;
 		String portIP = "";
 
