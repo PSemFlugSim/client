@@ -25,6 +25,13 @@ public interface FSBClientInterface
 	public void disconnect() throws IOException;
 
 	/**
+	 * Return the client's connection state
+	 * 
+	 * @return whether or not the client is connected
+	 */
+	public boolean isConnected();
+	
+	/**
 	 * Sends a position Update to the Raspberry Pi
 	 * 
 	 * @param position

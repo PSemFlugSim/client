@@ -31,11 +31,16 @@ public class FSBClient implements FSBClientInterface
 		this.clientSocket = new Socket(host, port);
 		this.connOutStream = new DataOutputStream(this.clientSocket.getOutputStream());
 	}
+	
 
 	public void disconnect() throws IOException
 	{
 		this.connOutStream.close();
 		this.clientSocket.close();
+	}
+
+	public boolean isConnected() {
+		return this.clientSocket.isConnected();
 	}
 
 	public void sendNewPosition(FSBPosition position) throws IOException
