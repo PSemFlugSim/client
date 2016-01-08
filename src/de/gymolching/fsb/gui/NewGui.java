@@ -33,7 +33,7 @@ import java.io.IOException;
  */
 public class NewGui {
 
-    private static final String DEFAULT_HOST_PORT_VALUE = "localhost:1234";
+    private static final String DEFAULT_HOST_PORT_VALUE = "pii.local:1234";
 
     public static void main(String[] args) {
         System.out.println("hello world");
